@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="DeviceAtlas Java Cloud Client API Examples"/>
+    <meta name="author" content="Afilias Technologies Ltd "/>
+    <!--<link rel="icon" href="../../favicon.ico">-->
+    <title>DeviceAtlas Java Cloud Client API Examples | Redirection</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/jumbotron-narrow.css}" href="../../css/jumbotron-narrow.css" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/deviceatlas.css}" href="../../css/deviceatlas.css" />
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="jumbotron">
+        <h2>Redirection Example</h2>
+        <p>You have been redirected to this page because either 
+            you are using a desktop browser, a device that is masquerading 
+            itself as desktop to get a desktop experience or your machine 
+            is not detected as a desktop, tablet or mobile but you
+            are being redirected to this website because this is the default
+            one.
+          </p>
+          
+    </div>
+    <div class="row marketing">
+        <div class="col-lg-12">
+            <h3>How it works</h3>
+            <p>
+            If we have different web sites and each one is created to give the best
+            content and user experience to a specific device type. Users will enter our
+            main web-site URL in their browsers, the source code which gets this first
+            request will use DeviceAtlas CloudApi to detect the device type, then based
+            on the conclusions, the user will be redirected to the web-site which provides
+            the best experience for her/his device.</p><p>
+            In this example four directories will mimic four different websites that give
+            specific service to "desktop browsers", "mobile device" and "tablet pcs".
+          </p>
+          <p>The web examples are based on a MVC model where files are placed inside <strong>/Examples/ExampleWebApp</strong>, 
+                having controllers in <strong>/src/main/java/com/deviceatlas/cloud/example/web</strong>
+                and views in <strong>/src/main/resources</strong>.</p>
+          <p>All requests first go to the <strong>ControllerWebApp</strong> controller object. Here it is used DeviceAtlas to detect device type and decides which template should be used to wrap around the contents.</p>
+          <p>View of this page is <strong>templates/redirection/desktop.html</strong></p>
+      
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+</div> <!-- /container -->
+</body>
+</html>

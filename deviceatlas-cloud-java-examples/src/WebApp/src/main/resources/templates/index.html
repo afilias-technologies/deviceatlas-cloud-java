@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="DeviceAtlas Java Cloud Client API Examples"/>
+    <meta name="author" content=""/>
+    <title>Index of the web examples</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/jumbotron-narrow.css}" href="../../css/jumbotron-narrow.css" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/deviceatlas.css}" href="../../css/deviceatlas.css" />
+    <script type="text/javascript" th:src="@{/js/deviceatlas-VERSION.min.js}" src="../../js/deviceatlas-VERSION.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="jumbotron">
+        <h2>Web Cloud Client Examples</h2>
+        <p class="lead">Welcome to the DeviceAtlas Java Cloud Client API web examples. This Client API provides an easy way to request the DeviceAtlas Cloud web service and get device information such as screen dimensions, whether it is mobile, vendor, model, etc.</p>
+        <p>Check out the following web examples based on the Java Spring framework.</p>
+    </div>
+    <div class="row marketing">
+        <div class="col-lg-12">
+            <h3>Your Cloud client details</h3>
+            <table class="sortable" id="clientInfo">
+                <thead>
+                    <th>Property</th>
+                    <th>Value</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>API version</td>
+                        <td th:text="${apiVersion}"/>
+                    </tr>
+                    <tr>
+                        <td>Licence key</td>
+                        <td th:text="${licenceKey}"/>
+                    </tr>
+                    <tr>
+                        <td>Headers</td>
+                        <td>
+                            <table id="headerInfo">
+                                <tbody>
+                                    <tr th:each="entry: ${headers.entrySet()}">
+                                        <td th:text="${entry.getKey()}" />
+                                        <td th:text="${#strings.abbreviate(entry.getValue(), 40)}" />
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Source</td>
+                        <td th:text="${source}"></td>
+                    </tr>
+                    <tr>
+                        <td>Selected endpoint</td>
+                        <td th:text="${cloudUrl}"></td>
+                    </tr>
+                    <tr>
+                        <td>Endpoints ranked by latency</td>
+                        <td>
+                            <p th:each="endpoint: ${endpoints}">
+                                <p th:text="${endpoint.getUrl().replace('/v1/detect/properties', '').replace('http://', '').replace(':80', '')}" />
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Send extra headers</td>
+                        <td th:text="${sendExtraHeaders}?'Yes':'No'"></td>
+                    </tr>
+                    <tr>
+                        <td>Use cache</td>
+                        <td th:text="${useCache}?'Yes':'No'"></td>
+                    </tr>
+                    <tr>
+                        <td>Use client cookie</td>
+                        <td th:text="${useClientCookie}?'Yes':'No'"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row marketing">
+        <div class="col-lg-6">
+            <h3><a href="/analytics">Analytics</a></h3>
+            <p>This web example uses the API to get properties for user-agents from a given list. Some properties such as vendor, browser name and device type are aggregated and the results are displayed as graphs and numbers.</p>
+            <h3><a href="/redirection">Redirection</a></h3>
+            <p>This web example uses the API to get properties for the current request and then uses some basic property values to decide which website provides the most suitable content for the device making the request.</p>
+        </div>
+        <div class="col-lg-6">
+            <h3><a href="/targeting">Content Targeting</a></h3>
+            <p>This example uses the API to detect the device and use some of its properties to show certain advertisements and download links which may be related or of interest to the user, considering his/her device.</p>
+            <h3><a href="/adaptation">Content Adaptation</a></h3>
+            <p>This web example uses the API to get properties for the device making the current request and then uses some basic property values to choose a suitable template to wrap around the content.</p>
+            <h3><a href="/visitor">Visitor information</a></h3>
+            <p>This web example displays the whole list of the detected user device properties.</p>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div> <!-- /container -->
+</body>
+</html>

@@ -1,0 +1,41 @@
+apply plugin: "java"
+apply plugin: "spring-boot"
+apply plugin: "release"
+apply plugin: "maven"
+
+group = "com.deviceatlas"
+version = "1.0"
+sourceCompatibility = "1.7"
+
+buildscript {
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.7.RELEASE")
+        classpath("au.com.ish.gradle:release:2.1")
+    }
+}
+
+dependencies {
+    compile("com.deviceatlas:deviceatlas-cloud-client:2.0.0")
+}
+
+jar {
+    manifest {
+            attributes("Specification-Title": "DeviceAtlas Cloud Java / Command line Application (JRE v" + sourceCompatibility + ")",
+            "Specification-Version": version,
+            "Specification-Vendor": "Afilias Technologies Ltd",
+            "Implementation-Title": "DeviceAtlas Cloud Java / Command line Application (JRE v" + sourceCompatibility + ")",
+            "Implementation-Version": version,
+            "Class-Path": configurations.runtime.files.collect { it.name }.join(' '),
+            "Implementation-Vendor": "Afilias Technologies Ltd",
+	    "Main-Class": "com.deviceatlas.cloud.example.cli.CommandLine")
+    }
+
+    baseName = 'device-identification-cloud-example-cli'
+    version = '0.1.0'
+}

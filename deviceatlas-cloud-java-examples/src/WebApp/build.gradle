@@ -1,0 +1,73 @@
+apply plugin: "java"
+apply plugin: "spring-boot"
+apply plugin: "release"
+apply plugin: "maven"
+
+group = "com.deviceatlas"
+version = "1.0"
+sourceCompatibility = "1.7"
+
+
+project.ext {
+    tmpDir = "${buildDir}/tmp"
+    clientSideVersion = "1.3"
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.7.RELEASE")
+        classpath("au.com.ish.gradle:release:2.1")
+    }
+}
+
+task copyClientSideToExample(type: Copy) {
+    from "../../../ExtraTools/ClientSideProperties"
+    into "${buildDir}/resources/main/static/js/"
+    include "*.js"
+    from "../../ExtraTools/ClientSideProperties"
+    into "${buildDir}/resources/main/static/js/"
+    include "*.js"
+}
+
+task setCorrectClientSideComponent(type: Copy, dependsOn: copyClientSideToExample) {
+    from("${projectDir}/src/main/resources/templates") {
+        include "**/*.html"
+        filter {
+            line -> line.replaceAll("deviceatlas-VERSION.min.js", "deviceatlas-${clientSideVersion}.min.js")
+        }
+    }
+    into "${buildDir}/resources/main/templates/"
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf:1.2.7.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-web:1.2.7.RELEASE")
+    compile("org.springframework.mobile:spring-mobile-device:1.1.5.RELEASE")
+    compile("com.deviceatlas:deviceatlas-cloud-client:2.0.0")
+    compile("javax.servlet:javax.servlet-api")
+    compile("javax.persistence:persistence-api:1.0")
+    compile("javax.el:el-api:2.2.1-b04")
+    compile("javax.inject:javax.inject:1")
+}
+
+jar {
+    manifest {
+            attributes("Specification-Title": "DeviceAtlas Cloud Java / Example Web Application (JRE v" + sourceCompatibility + ")",
+            "Specification-Version": version,
+            "Specification-Vendor": "Afilias Technologies Ltd",
+            "Implementation-Title": "DeviceAtlas Cloud Java / Example Web Application (JRE v" + sourceCompatibility + ")",
+            "Implementation-Version": version,
+            "Class-Path": configurations.runtime.files.collect { it.name }.join(' '),
+            "Implementation-Vendor": "Afilias Technologies Ltd",
+            "Start-Class": "com.deviceatlas.cloud.example.web.WebApp")
+    }
+
+    baseName = 'device-identification-cloud-example-web'
+    version =  '0.1.0'
+}
+
+jar.dependsOn setCorrectClientSideComponent

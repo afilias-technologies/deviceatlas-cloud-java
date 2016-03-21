@@ -1,0 +1,15 @@
+th { text-align: left; background-color: #eee; border: 2px solid #ddd; font-weight: normal; padding: 5px; }
+td { padding: 3px; border-bottom: 1px dotted #ccc; }
+td.name { width: 170px; }
+td.hits { width: 80px; }
+td.line { width: 215px; }
+td.line div.linepx { height: 4px; width: 1px; background-color: #b6dcfd; float: left; }
+div.col-lg-6 ul { -webkit-margin-before: 0; -webkit-margin-after: 0; -webkit-margin-start: 0; -webkit-margin-end: 0; -webkit-padding-start: 0; list-style: none; height: 42px; padding: 0; }
+div.col-lg-6 ul li { float: left; background-color: #b6dcfd; border: 3px dashed #fff; margin: 5px 5px 5px 0; padding: 7px; color: #116EBA; font-weight: bold; }
+img { width: 100%; }
+table.sortable { margin: 0 auto; }
+table.sortable th { cursor: pointer; }
+table#clientInfo td:first-child { width: 150px; }
+.jumbotron p { font-size: 18px; text-align: left; }
+.jumbotron ol { text-align: left; }
+.alert { margin-top: 30px; }

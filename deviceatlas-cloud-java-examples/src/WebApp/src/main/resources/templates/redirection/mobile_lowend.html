@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  </head>
+  <body>
+
+    <div th:if="${exceptionMessage != null}">
+        <p th:text="${exceptionMessage}"></p>
+        <p>Please check your licence or get a free one from <a href=" https://deviceatlas.com/cloud-free-signup"> https://deviceatlas.com/cloud-free-signup</a>.</p>
+    </div>
+
+    <p>
+      <strong>Low-end Mobile Device Experience</strong>
+    </p>
+
+    <p>
+      This is the layout of our example site intended for low-end devices!
+    </p>
+    <p>
+      You are redirected to this page because your low-end device doesn't seem
+      to support HTML but supports WML.
+    </p>
+
+    <p><strong>How it works</strong></p>
+    <p>
+      If we have different web sites and each one is created to give the best
+      content and user experience to a specific device type. Users will enter our
+      main web-site URL in their browsers, the source code which gets this first
+      request will use DeviceAtlas CloudApi to detect the device type, then based
+      on the conclusions, the user will be redirected to the web-site which provides
+      the best experience for her/his device.</p><p>
+      In this example four directories will mimic four different websites that give
+      specific service to "desktop browsers", "mobile device" and "tablet pcs".
+    </p>
+          <p>The web examples are based on a MVC model where files are placed inside <strong>/Examples/ExampleWebApp</strong>, 
+                having controllers in <strong>/src/main/java/com/deviceatlas/cloud/example/web</strong>
+                and views in <strong>/src/main/resources</strong>.</p>
+          <p>All requests first go to the <strong>ControllerWebApp</strong> controller object. Here it is used DeviceAtlas to detect device type and decides which template should be used to wrap around the contents.</p>
+          <p>View of this page is <strong>templates/redirection/mobile_lowend.html</strong></p>
+
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+    <div th:if="${exceptionMessage != null}">
+        <p th:text="${exceptionMessage}"></p>
+        <p>Please check your licence or get a free one from <a href=" https://deviceatlas.com/cloud-free-signup"> https://deviceatlas.com/cloud-free-signup</a>.</p>
+    </div>
+
+    <h2>Content Adaptation Example</h2>
+    <p>This is the layout of our example site intended for low-end device experience.</p>
+
+    <h3>Content Adaptation</h3>
+    <p>To adapt contents dynamically, so each visitor gets the optimum user experience. Whether the device used is a smartphone, tablet, eReader, or a low end device, you only get one chance to make a first impression. Ensure your site loads quickly and is easy to navigate. DeviceAtlas provides all the information needed to support content adaptation decisions.</p>
+    <p>On a page request, DeviceAtlas API is used to get the device properties. By putting conditions on some of the properties which are usually about the device type a layout template is chosen loaded wrapped around the data and sent back to the user.</p>
+    <p>Usually most of the contents remain the same and only the templates and styles are tuned for different devices.</p>
+    <p>Using the handful of DeviceAtlas properties each template can be fine-tuned for the device and browser</p>
+
+    <h3>Example directory and files</h3>
+    <p>The web examples are based on a MVC model where files are placed inside <strong>/Examples/ExampleWebApp</strong>, 
+        having controllers in <strong>/src/main/java/com/deviceatlas/cloud/example/web</strong>
+        and views in <strong>/src/main/resources</strong>.</p>
+    <p>All requests first go to the <strong>ControllerWebApp</strong> controller object. Here it is used DeviceAtlas to detect device type and decides which template should be used to wrap around the contents.</p>
+    <p>View of this page is <strong>templates/adaptation/mobile_lowend.html</strong></p>
+
+</body>
+</html>

@@ -1,0 +1,3 @@
+rootProject.name = "cloud-java"
+include 'deviceatlas-cloud-client', 'deviceatlas-cloud-java-examples'
+

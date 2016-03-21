@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="DeviceAtlas Java Cloud Client API Examples"/>
+    <meta name="author" content="Afilias Technologies Ltd "/>
+    <title>DeviceAtlas Java Cloud Client API Examples - Analytics</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/jumbotron-narrow.css}" href="../../css/jumbotron-narrow.css" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/deviceatlas.css}" href="../../css/deviceatlas.css" />
+    <script type="text/javascript" th:src="@{/js/sortable.js}" src="../../js/sortable.js"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="jumbotron">
+        <h2>Analytics Example</h2>
+        <p><strong>Scenario:</strong> let's say we have a log with the user-agents of users who visited our website. We can iterate over the user-agents and get properties of each one from DeviceAtlas and aggregate the traffic for the properties of our interest.</p>
+        <p>In this example we will:</p>
+        <ol>
+            <li>open a sample user-agent list file</li>
+            <li>iterate over the user-agents</li>
+            <li>get properties of each user agent using DeviceAtlas</li>
+            <li>aggregate few properties</li>
+            <li>display the results</li>
+        </ol>
+    </div>
+    <div class="row marketing">
+        <div class="col-lg-6">
+            <h3>Traffic of desktop browser vs mobile devices</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Device type</th>
+                    <th>Hits</th>
+                    <th class="sorttable_nosort"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="name">Mobile device</td>
+                    <td class="hits" th:text="${totalMobileTraffic}"/>
+                    <td class="line"><div class="linepx" th:each="i : ${#numbers.sequence(1, totalMobileTraffic*200/total)}"></div></td>
+                </tr>
+                <tr>
+                    <td class="name">Desktop browser</td>
+                    <td class="hits" th:text="${trafficDesktopBrowsers}"/>
+                    <td class="line"><div class="linepx" th:each="i : ${#numbers.sequence(1, trafficDesktopBrowsers*200/total)}"></div></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <h3>Traffic of mobile device types</h3>
+            <table class="sortable">
+                <thead>
+                <tr>
+                    <th>Vendor</th>
+                    <th>Hits</th>
+                    <th class="sorttable_nosort"></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="entry: ${trafficMobileDevices.entrySet()}">
+                        <td class="name" th:text="${entry.getKey()}" />
+                        <td class="hits" th:text="${entry.getValue().toString()}" />
+                        <td class="line"><div class="linepx" th:each="i : ${#numbers.sequence(1, entry.getValue()*200/total)}"></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <h3>Traffic by mobile vendor</h3>
+            <table class="sortable">
+                <thead>
+                <tr>
+                <th>Vendor</th>
+                <th>Hits</th>
+                <th class="sorttable_nosort"></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="entry: ${trafficByMobileVendor.entrySet()}">
+                        <td class="name" th:text="${entry.getKey()}" />
+                        <td class="hits" th:text="${entry.getValue().toString()}" />
+                        <td class="line"><div class="linepx" th:each="i : ${#numbers.sequence(1, entry.getValue()*200/trafficByMobileVendorTotal)}"></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <h3>Traffic by operating systems</h3>
+            <table class="sortable">
+                <thead>
+                <tr>
+                    <th>OS</th>
+                    <th>Hits</th>
+                    <th class="sorttable_nosort"></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="entry: ${trafficByOs.entrySet()}">
+                        <td class="name" th:text="${entry.getKey()}" />
+                        <td class="hits" th:text="${entry.getValue().toString()}" />
+                        <td class="line"><div class="linepx" th:each="i : ${#numbers.sequence(1, entry.getValue()*200/trafficByOsTotal)}"></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+</div> <!-- /container -->
+</body>
+</html>

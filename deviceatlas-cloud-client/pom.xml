@@ -1,0 +1,111 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.deviceatlas</groupId>
+    <artifactId>device-identification-cloud</artifactId>
+    <version>2.0.0</version>
+    <name>DeviceAtlas Cloud API</name>
+    <description>DeviceAtlas is the world's fastest, most accurate device detection solution
+providing real-time information on all mobile and other devices accessing the web.</description>
+    <url>https://deviceatlas.com</url>
+    <packaging>jar</packaging>
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>DeviceAtlas Team</name>
+            <email>da.tech@deviceatlas.com</email>
+            <organization>Afilias Technologies Ltd</organization>
+            <organizationUrl>https://afilias.info/mobile</organizationUrl>
+        </developer>
+        <developer>
+            <name>David Carlier</name>
+            <email>dcarlier@afilias.info</email>
+        </developer>
+        <developer>
+            <name>Francisco Hernandez</name>
+            <email>fhernand@afilias.info</email>
+        </developer>
+        <developer>
+        <name>Gustavo Franke</name>
+            <email>gfranke@afilias.info</email>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git@github.com:afilias-technologies/deviceatlas-cloud-java.git</connection>
+        <developerConnection>scm:git:git@github.com:afilias-technologies/deviceatlas-cloud-java.git</developerConnection>
+        <url>git@github.com:afilias-technologies/deviceatlas-cloud-java.git</url>
+    </scm>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+            <version>2.6.6</version>
+        </dependency>
+        <dependency>
+            <groupId>net.spy</groupId>
+            <artifactId>spymemcached</artifactId>
+            <version>2.11.4</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <goals>
+                                    <goal>sign</goal>
+                            </goals>
+                        </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5</version>
+                <configuration>
+                    <verbose>true</verbose>
+                    <fork>true</fork>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-surefire-plugin</artifactId>
+                 <version>2.19.1</version>
+                 <configuration>
+	             <skipTests>true</skipTests>
+        	 </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

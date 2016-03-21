@@ -1,0 +1,143 @@
+task wrapper(type: Wrapper) {
+    gradleVersion = 2.4
+}
+
+apply plugin: 'release'
+
+release {
+    failOnSnapshotDependencies = true
+    allowLocalModifications = true
+    releaseDryRun = false
+    scm = 'git'
+}
+
+allprojects {
+    group = "com.deviceatlas"
+    version = release.projectVersion
+}
+
+buildscript {
+
+    repositories {
+        maven {
+            url mavenRepoUrl
+        }
+    }
+
+    dependencies {
+        classpath 'au.com.ish.gradle:release:2.1'
+    }
+}
+
+project.ext {
+    tmpDir = "${buildDir}/tmp"
+    zipDir = "${buildDir}/cloud-java"
+    cloudJavaDirectory = "${zipDir}/deviceatlas-cloud-java-${version}"
+    documentationDirectory = "${cloudJavaDirectory}/Documentation"
+    apiDirectory = "${cloudJavaDirectory}/Api"
+    thirdpartyDirectory = "${apiDirectory}/thirdparty"
+    examplesDirectory = "${cloudJavaDirectory}/Examples"
+    clientPropsDirectory = "${cloudJavaDirectory}/ExtraTools/ClientSideProperties"
+
+
+    ehCacheVersion = "1.6.2"
+    ehCacheDocsDirectory = "ehcache-${ehCacheVersion}"
+
+
+    clientSideVersion = "1.3"
+}
+
+configurations {
+    examples { transitive = false }
+    slf4j
+}
+
+dependencies {
+    examples project(":deviceatlas-cloud-java-examples")
+    slf4j "org.slf4j:slf4j-api:1.7.13"
+    slf4j "ch.qos.logback:logback-core:1.1.3"
+    slf4j "ch.qos.logback:logback-classic:1.1.3"
+}
+
+
+task copyApiConfig(type: Copy) {
+    from "deviceatlas-cloud-client/config"
+    into "$apiDirectory/config"
+}
+
+task copyDependencies(type: Copy, dependsOn: ":deviceatlas-cloud-client:jar") {
+    from configurations.slf4j
+    into "$apiDirectory"
+}
+
+task copyApiJar(type: Copy, dependsOn: copyDependencies) {
+    from "deviceatlas-cloud-client/build/libs/deviceatlas-cloud-client-${version}.jar"
+    into "$apiDirectory"
+}
+
+task buildApiDirectory(dependsOn: [copyApiConfig, copyApiJar])
+
+task copyJavaDocs(type: Copy, dependsOn: ":deviceatlas-cloud-client:javadoc") {
+    from "deviceatlas-cloud-client/build/docs"
+    into "${documentationDirectory}"
+}
+
+task addChangelog(type: Copy) {
+    from("${projectDir}") {
+       include 'CHANGELOG'
+    }
+    into "${cloudJavaDirectory}"
+}
+
+task addExtraTools(type: Copy) {
+    from("${projectDir}/ExtraTools/ClientSideProperties") {
+       include '**/*'
+    }
+    into "${clientPropsDirectory}"
+}
+
+task copyExamples(type: Copy) {
+    from("deviceatlas-cloud-java-examples/src") {
+        include '**/*.jsp'
+        filter {
+            line -> line.replaceAll("deviceatlas-VERSION.min.js","deviceatlas-${clientSideVersion}.min.js")
+        }
+
+        filter {
+            line -> line.replaceAll("deviceatlas-cloud-client-VERSION.jar","deviceatlas-cloud-client-${version}.jar")
+        }
+    }
+
+    from("deviceatlas-cloud-java-examples/src") {
+        include '**/build.xml'
+        filter {
+            line -> line.replaceAll("deviceatlas-cloud-client-VERSION.jar","deviceatlas-cloud-client-${version}.jar")
+        }
+    }
+
+    from("deviceatlas-cloud-java-examples/src") {
+        include '**/*.java'
+        filter {
+            line -> line.replaceAll("deviceatlas-cloud-client-VERSION.jar","deviceatlas-cloud-client-${version}.jar")
+        }
+    }
+
+    from("deviceatlas-cloud-java-examples/src") {
+        exclude '**/*.jsp'
+        exclude '**/build.xml'
+        exclude '**/*.java'
+    }
+
+    into "${examplesDirectory}"
+}
+
+assemble.dependsOn buildApiDirectory, copyJavaDocs, copyExamples, addChangelog, addExtraTools
+
+task packageCloud(type: Zip) {
+    from "${zipDir}"
+    baseName "deviceatlas-cloud-java"
+}
+
+artifacts {
+    archives packageCloud
+}

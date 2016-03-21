@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="DeviceAtlas Java Cloud Client API Examples"/>
+    <meta name="author" content="Afilias Technologies Ltd "/>
+    <title>DeviceAtlas Java Cloud Client API Examples - Content Targeting</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/jumbotron-narrow.css}" href="../../css/jumbotron-narrow.css" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/deviceatlas.css}" href="../../css/deviceatlas.css" />
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="jumbotron">
+        <h2>Content Targeting Example</h2>
+        <p><strong>Scenario:</strong> First, let's plan what we want to do and what this example is about. In this example we want to show two samples of content targeting.</p>
+        <p>(1) Advertising, we have a database which contains our ads and a knowledge base
+        that includes some logic that relates the ads to property values. For example
+        our knowledge base would tell us "people who have old and low-end phones
+        are more likely to be interested in new high-end smart phones" or "those
+        who have specific devices (brand, model, type of device, etc.) would probably
+        be interested in specific devices or accessories". DeviceAtlas can be used
+        to get device properties, then used against the knowledge base to get the
+        set of ads the user would probably be interested in. In this example we
+        use a small array and a few if conditions to mimic the knowledge base.</p>
+        <p>(2) Downloading an app, we have an app written in different platforms, when a
+        user comes to download the app we can use DeviceAtlas to detect user's
+        operating system and automatically show him the link to the app which is
+        created for her/his device.</p>
+    </div>
+    <div class="row marketing">
+        <div class="col-lg-6">
+            <h3>Ads targeted for your device</h3>
+            <ul><li th:each="value : ${toAdvertise}" th:text="${value}"/></ul>
+        </div>
+        <div class="col-lg-6">
+            <h3>App download link based on your OS</h3>
+            <ul><li th:each="entry : ${downloadLinks.entrySet()}"><a th:href="${entry.getValue()}" th:text="${entry.getKey()}" /></li></ul>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+</div> <!-- /container -->
+</body>
+</html>

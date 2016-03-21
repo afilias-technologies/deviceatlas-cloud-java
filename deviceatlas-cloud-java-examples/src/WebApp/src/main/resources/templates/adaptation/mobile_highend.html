@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="DeviceAtlas Java Cloud Client API Examples"/>
+    <meta name="author" content="Afilias Technologies Ltd "/>
+    <title>DeviceAtlas Java Cloud Client API Examples | Adaptation</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/jumbotron-narrow.css}" href="../../css/jumbotron-narrow.css" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/deviceatlas.css}" href="../../css/deviceatlas.css" />
+    <script type="text/javascript" th:src="@{/js/sortable.js}" src="../../js/sortable.js"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="jumbotron">
+        <h2>Content Adaptation Example</h2>
+        <p>This is the layout of our example site intended for mobile device experience.</p>
+    </div>
+    <div class="row marketing">
+
+        <div class="col-lg-12">
+
+            <h3>Content Adaptation</h3>
+            <p>To adapt contents dynamically, so each visitor gets the optimum user experience. Whether the device used is a smartphone, tablet, eReader, or a low end device, you only get one chance to make a first impression. Ensure your site loads quickly and is easy to navigate. DeviceAtlas provides all the information needed to support content adaptation decisions.</p>
+            <p>On a page request, DeviceAtlas API is used to get the device properties. By putting conditions on some of the properties which are usually about the device type a layout template is chosen loaded wrapped around the data and sent back to the user.</p>
+            <p>Usually most of the contents remain the same and only the templates and styles are tuned for different devices.</p>
+            <p>Using the handful of DeviceAtlas properties each template can be fine-tuned for the device and browser</p>
+
+            <h3>Image</h3>
+            <p>Let's say we want to display a photo, as we know what type of device is viewing the page we can select a photo which is the most suitable for that type of device. We can even optimize the page further and use property values such as "displayWidth", "displayHeight", "usableDisplayWidth" and "usableDisplayHeight" to provide the optimal photo.</p>
+            <p>As we already know a mobile is viewing this page it seems showing the smallest sized photo is a safe bet, but with the new devices being able to display high resulations it may not be a pleasant experience for the user so lets use the properties...</p>
+            <img th:src="${imagePath}" src="../..${imagePath}" />
+
+            <h3>Links and buttons</h3>
+            <a href="#">Goto somewhere</a>
+            <br/>
+            <button>Do something</button>
+
+            <h3>Can we display videos on this browser?</h3>
+            <span th:text="${supportsHTMLVideo}?'This browser supports the video HTML tag, we can use it to show a video here.':'This browser does not support the video HTML tag.'"></span>
+            <span th:text="${supportsFlash}?'Flash is supported we can display flash here.':'Flash is not supported.'"></span>
+
+            <h3>Example directory and files</h3>
+            <p>The web examples are based on a MVC model where files are placed inside <strong>/Examples/ExampleWebApp</strong>, 
+                having controllers in <strong>/src/main/java/com/deviceatlas/cloud/example/web</strong>
+                and views in <strong>/src/main/resources</strong>.</p>
+            <p>All requests first go to the <strong>ControllerWebApp</strong> controller object. Here it is used DeviceAtlas to detect device type and decides which template should be used to wrap around the contents.</p>
+            <p>View of this page is <strong>templates/adaptation/mobile_highend.html</strong></p>
+            
+        </div>
+
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+</div> <!-- /container -->
+</body>
+</html>

@@ -1,0 +1,116 @@
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'sonar-runner'
+apply plugin: 'jacoco'
+apply plugin: 'findbugs'
+
+sourceCompatibility = 1.6
+
+dependencies {
+    compile "net.sf.ehcache:ehcache:2.6.11"
+    compile "net.spy:spymemcached:2.12.0"
+    compile "javaee:javaee-api:5"
+    compile "org.mockito:mockito-all:1.10.19"
+    compile "ch.qos.logback:logback-core:1.1.3"
+    compile "ch.qos.logback:logback-classic:1.1.3"
+    compile "org.slf4j:slf4j-api:1.7.13"
+
+    testCompile "junit:junit:4.12"
+    compile "org.codehaus.groovy:groovy-all:2.4.1"
+    testCompile 'org.yaml:snakeyaml:1.16'
+    testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
+    testCompile 'com.athaydes:spock-reports:1.2.5'
+}
+
+javadoc {
+    failOnError = false
+    exclude "**/parser/**"
+    exclude "**/tools/**"
+    exclude "**/utils/**"
+    configure(options) {
+        memberLevel = JavadocMemberLevel.PUBLIC
+    }
+    destinationDir = project.file("${buildDir}/docs/Javadoc")
+}
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.host.url", "${sonarHostUrl}"
+        property "sonar.jdbc.url", "${sonarJdbcUrl}"
+        property "sonar.jdbc.driverClassName", "${sonarJdbcDriverClassName}"
+        property "sonar.jdbc.username", "${sonarJdbcUsername}"
+        property "sonar.jdbc.password", "${sonarJdbcPassword}"
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+
+findbugsTest {
+    excludeFilter file('excludeFilter.xml')
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+    }
+
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+        resources {
+            srcDirs = ['src/test/resources','config']
+        }
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn:classes) {
+    classifier = 'sources'
+    manifest = jar.manifest
+    from sourceSets.main.allJava
+}
+
+test {
+    if (project.hasProperty("activeLicence")) {
+        exclude "**/*IT.*"
+        systemProperty "activeLicence", activeLicence
+    } else {
+        exclude "**/*.*"
+        print("for the unit tests, you need to launch ./gradlew <options> <task> -PactiveLicence=<YOUR LICENCE>\n")
+    }
+}
+
+task integrationTests(type: Test) {
+    include "**/*IT.*"
+}
+
+task javadocJar(type: Jar, dependsOn:javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+jar {
+    manifest {
+        attributes("Specification-Title": "DeviceAtlas Cloud Java (JRE v" + sourceCompatibility + ")",
+                "Specification-Version": version,
+                "Specification-Vendor": "Afilias Technologies Ltd",
+                "Implementation-Title": "DeviceAtlas Cloud Java (JRE v" + sourceCompatibility + ")",
+                "Implementation-Version": version,
+                "Class-Path": configurations.runtime.files.collect { it.name }.join(' '),
+                "Implementation-Vendor": "Afilias Technologies Ltd")
+    }
+}
+

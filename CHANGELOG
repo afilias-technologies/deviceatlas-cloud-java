@@ -1,0 +1,57 @@
+# Change Log
+All notable changes to this package will be documented in this file.
+
+## [2.0.0]
+
+### Added
+- Cache provider interface with File, Memcached, Mock and Simple cache 
+provider implementations.
+- Adding three new alternative methods to call the cloud service
+which returns a Result object.
+- getResult.
+- getResultByUserAgent.
+- getResultByHeaders.
+
+### Changed
+
+#### Java compatibility
+1.6
+
+#### Namespace
+- mobi.mtld.deviceatlas changed to com.deviceatlas.cloud.deviceidentification.
+
+#### Class Names
+- mobi.mtld.deviceatlas.DaClientException to 
+com.deviceatlas.cloud.deviceidentification.client.ClientException.
+- mobi.mtld.deviceatlas.Server to 
+com.deviceatlas.cloud.deviceidentification.endpoint.Endpoint.
+- mobi.mtld.deviceatlas.cloud.json.Json class renamed to 
+com.deviceatlas.cloud.deviceidentification.parser.JsonParser.
+- Same namespace change for JsonException.
+- mobi.mtld.deviceatlas.cloud.GetCachedServers to 
+com.deviceatlas.cloud.deviceidentification.tools.CachedEndpoints.
+- mobi.mtld.deviceatlas.cloud.CheckServerLatency to
+com.deviceatlas.cloud.deviceidentification.tools.LatencyChecker.
+
+#### Client Constants
+- Now placed on the enum ClientConstants class (API version number, name of
+the Client-side properties cookie...).
+
+#### Examples
+- Web examples based on Spring boot, Thymeleaf and Bootstrap.
+
+#### Logging
+- Add org.slf4j.Logger as logging framework.
+
+#### Ehcache Support
+- Ehcache provider compatible with Ehcache versions less than 1.6.2.
+
+### Deprecated
+- Client.getServerPhaseOutLifetime() to Client.getServerRankingLifetime()
+- Client.setServerPhaseOutLifetime() to Client.setServerRankingLifetime()
+- Client.getAutoServerRankingLifetime() to Client.getServerRankingLifetime()
+- Client.setAutoServerRankingLifetime() to Client.setServerRankingLifetime()
+- Client.getDeviceData() to Client.getResult().
+- Client.getDeviceDataByUserAgent() to Client.getResultByUserAgent().
+- Client.getDeviceDataByHeaders() to Client.getResultByHeaders().
+
