@@ -21,7 +21,7 @@ buildscript {
 }
 
 dependencies {
-    compile("com.deviceatlas:deviceatlas-cloud-client:2.0.0")
+    compile("com.deviceatlas:deviceatlas-cloud-java-client:2.0.0")
 }
 
 jar {

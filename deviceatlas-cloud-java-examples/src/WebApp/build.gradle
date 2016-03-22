@@ -47,7 +47,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf:1.2.7.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-web:1.2.7.RELEASE")
     compile("org.springframework.mobile:spring-mobile-device:1.1.5.RELEASE")
-    compile("com.deviceatlas:deviceatlas-cloud-client:2.0.0")
+    compile("com.deviceatlas:deviceatlas-cloud-java-client:2.0.0")
     compile("javax.servlet:javax.servlet-api")
     compile("javax.persistence:persistence-api:1.0")
     compile("javax.el:el-api:2.2.1-b04")
