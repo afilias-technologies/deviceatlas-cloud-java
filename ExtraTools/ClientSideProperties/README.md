@@ -26,15 +26,15 @@ property.
 The JavaScript  detection file creates a special cookie with the detected client 
 properties. The usage is different in the Enterprise and Cloud APIs.
 
-* Use with Enterprise APIs *
+*Use with Enterprise APIs*
 
 If the cookie is available and the DeviceApiWeb extension is used, the API will
 automatically use the cookie contents as a part of the detection. However it is
 also possible to pass the client-side properties manually to the APIs.
 
-** Apache / NGINX / IIS web server modules handle the cookie automatically. **
+**Apache / NGINX / IIS web server modules handle the cookie automatically.**
 
-* Use with Cloud APIs *
+*Use with Cloud APIs*
 
 If the cookie is available and the API is configured to use the cookie, the 
 API will automatically forward the cookie contents to the Cloud service and 
@@ -50,7 +50,7 @@ which are normally not detectable.
 The cookie containing the properties is called "DAPROPS".
 
 
-### Basic Server Side Usage ### 
+### Basic Server Side Usage ###
 1. Include the deviceatlas-X.X.min.js file on your web page.
 2. In your web application, pass the contents of the DeviceAtlas cookie
    to the DeviceAtlas API.

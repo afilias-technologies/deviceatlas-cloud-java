@@ -425,13 +425,13 @@ would be required.
 Usage (command line):
 
 ```shell
-java -cp ./Api/config:./Api/deviceatlas-cloud-client-VERSION.jar com.deviceatlas.cloud.deviceidentification.tools.LatencyChecker LICENCE-KEY
+java -cp ./Api/config:./Api/deviceatlas-cloud-java-client-VERSION.jar com.deviceatlas.cloud.deviceidentification.tools.LatencyChecker LICENCE-KEY
 ```
 
 *Windows*
 
 ```shell
-java -cp ./Api/config;./Api/deviceatlas-cloud-client-VERSION.jar com.deviceatlas.cloud.deviceidentification.tools.LatencyChecker LICENCE-KEY
+java -cp ./Api/config;./Api/deviceatlas-cloud-java-client-VERSION.jar com.deviceatlas.cloud.deviceidentification.tools.LatencyChecker LICENCE-KEY
 ```
 
 

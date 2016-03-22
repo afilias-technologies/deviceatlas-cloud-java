@@ -40,9 +40,9 @@ import org.slf4j.LoggerFactory;
  * <br/>
  * <b>Usage:</b><br/>
  * Linux:<br/>
- *   java -cp ./thirdparty/ehcache-1.6.2.jar:./config:deviceatlas-cloud-client-VERSION.jar LatencyChecker LICENCE-KEY
+ *   java -cp ./thirdparty/ehcache-1.6.2.jar:./config:deviceatlas-cloud-java-client-VERSION.jar LatencyChecker LICENCE-KEY
  * Windows:<br/>
- *   java -cp .\thirdparty\ehcache-1.6.2.jar;.\config;deviceatlas-cloud-client-VERSION.jar LatencyChecker LICENCE-KEY
+ *   java -cp .\thirdparty\ehcache-1.6.2.jar;.\config;deviceatlas-cloud-java-client-VERSION.jar LatencyChecker LICENCE-KEY
  * 
  * Copyright (c) 2008-2016 by Afilias Technologies Limited. All rights reserved.
  * @author Afilias Technologies Ltd

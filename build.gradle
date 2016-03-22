@@ -61,24 +61,24 @@ dependencies {
 
 
 task copyApiConfig(type: Copy) {
-    from "deviceatlas-cloud-client/config"
+    from "deviceatlas-cloud-java-client/config"
     into "$apiDirectory/config"
 }
 
-task copyDependencies(type: Copy, dependsOn: ":deviceatlas-cloud-client:jar") {
+task copyDependencies(type: Copy, dependsOn: ":deviceatlas-cloud-java-client:jar") {
     from configurations.slf4j
     into "$apiDirectory"
 }
 
 task copyApiJar(type: Copy, dependsOn: copyDependencies) {
-    from "deviceatlas-cloud-client/build/libs/deviceatlas-cloud-client-${version}.jar"
+    from "deviceatlas-cloud-java-client/build/libs/deviceatlas-cloud-java-client-${version}.jar"
     into "$apiDirectory"
 }
 
 task buildApiDirectory(dependsOn: [copyApiConfig, copyApiJar])
 
-task copyJavaDocs(type: Copy, dependsOn: ":deviceatlas-cloud-client:javadoc") {
-    from "deviceatlas-cloud-client/build/docs"
+task copyJavaDocs(type: Copy, dependsOn: ":deviceatlas-cloud-java-client:javadoc") {
+    from "deviceatlas-cloud-java-client/build/docs"
     into "${documentationDirectory}"
 }
 
@@ -104,21 +104,21 @@ task copyExamples(type: Copy) {
         }
 
         filter {
-            line -> line.replaceAll("deviceatlas-cloud-client-VERSION.jar","deviceatlas-cloud-client-${version}.jar")
+            line -> line.replaceAll("deviceatlas-cloud-java-client-VERSION.jar","deviceatlas-cloud-java-client-${version}.jar")
         }
     }
 
     from("deviceatlas-cloud-java-examples/src") {
         include '**/build.xml'
         filter {
-            line -> line.replaceAll("deviceatlas-cloud-client-VERSION.jar","deviceatlas-cloud-client-${version}.jar")
+            line -> line.replaceAll("deviceatlas-cloud-java-client-VERSION.jar","deviceatlas-cloud-java-client-${version}.jar")
         }
     }
 
     from("deviceatlas-cloud-java-examples/src") {
         include '**/*.java'
         filter {
-            line -> line.replaceAll("deviceatlas-cloud-client-VERSION.jar","deviceatlas-cloud-client-${version}.jar")
+            line -> line.replaceAll("deviceatlas-cloud-java-client-VERSION.jar","deviceatlas-cloud-java-client-${version}.jar")
         }
     }
 
@@ -132,12 +132,3 @@ task copyExamples(type: Copy) {
 }
 
 assemble.dependsOn buildApiDirectory, copyJavaDocs, copyExamples, addChangelog, addExtraTools
-
-task packageCloud(type: Zip) {
-    from "${zipDir}"
-    baseName "deviceatlas-cloud-java"
-}
-
-artifacts {
-    archives packageCloud
-}

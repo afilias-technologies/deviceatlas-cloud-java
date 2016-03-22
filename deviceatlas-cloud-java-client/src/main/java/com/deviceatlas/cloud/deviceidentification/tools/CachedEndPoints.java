@@ -31,9 +31,9 @@ package com.deviceatlas.cloud.deviceidentification.tools;
  * <br/>
  * <b>Usage:</b><br/>
  * Linux:<br/>
- *   java -cp ./thirdparty/ehcache-1.6.2.jar:./config:deviceatlas-cloud-client-VERSION.jar CachedEndPoints LICENCE-KEY
+ *   java -cp ./thirdparty/ehcache-1.6.2.jar:./config:deviceatlas-cloud-java-client-VERSION.jar CachedEndPoints LICENCE-KEY
  * Windows:<br/>
- *   java -cp .\thirdparty\ehcache-1.6.2.jar;.\config;deviceatlas-cloud-client-VERSION.jar CachedEndPoints LICENCE-KEY
+ *   java -cp .\thirdparty\ehcache-1.6.2.jar;.\config;deviceatlas-cloud-java-client-VERSION.jar CachedEndPoints LICENCE-KEY
  *
  * Copyright (c) 2008-2016 by Afilias Technologies Limited. All rights reserved.
  * @author Afilias Technologies Ltd

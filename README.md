@@ -47,7 +47,7 @@ Properties properties = result.getProperties();
 
 ## Documentation ##
 
-See [Cloud Client API](deviceatlas-cloud-client/README.md) readme for further doumentation.
+See [Cloud Client API](deviceatlas-cloud-java-client/README.md) readme for further doumentation.
 
 
 ## About DeviceAtlas ##
@@ -59,3 +59,5 @@ Find more at https://deviceatlas.com/
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 _Copyright (c) 2008-2016 by Afilias Technologies Limited. All rights reserved. https://deviceatlas.com_
+
++
