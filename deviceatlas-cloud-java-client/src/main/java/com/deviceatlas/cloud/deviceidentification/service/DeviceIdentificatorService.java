@@ -483,24 +483,27 @@ public class DeviceIdentificatorService {
 
     public String extractCookieValue(Map<String, String> headers) {
         String cookie = null;
+        String rawCookies;
+        Boolean ableToGetHeaders = useClientCookie && headers != null;
+        String clientCookieName = ClientConstants.CLIENT_COOKIE_NAME.toString();
         // get client side component cookie value
-        if (useClientCookie && headers != null &&
-                (cookie = headers.get(ClientConstants.CLIENT_COOKIE_NAME.toString())) != null) {
+        if (ableToGetHeaders &&
+                (cookie = headers.get(clientCookieName)) != null) {
             return cookie;
         }
 
-        if (useClientCookie && headers != null &&
-                (cookie = headers.get(HeaderConstants.COOKIE_HEADER.toString())) != null) {
-                String[] cookies = cookie.split(";");
-                for (String c : cookies) {
-                        c = c.trim();
-                        if (c.startsWith(ClientConstants.CLIENT_COOKIE_NAME.toString())) {
-                            cookie = c.replace(ClientConstants.CLIENT_COOKIE_NAME.toString(), "").replace("=", "");
-                        }
+        if (ableToGetHeaders &&
+                (rawCookies = headers.get(HeaderConstants.COOKIE_HEADER.toString())) != null) {
+            String[] cookies = rawCookies.split(";");
+            for (String c : cookies) {
+                c = c.trim();
+                if (c.startsWith(clientCookieName + "=")) {
+                    return c.replace(clientCookieName + "=", "");
                 }
+            }
         }
 
-        return cookie;
+        return null;
     }
 
     /**
